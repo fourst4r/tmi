@@ -7,8 +7,8 @@ import (
 )
 
 func main() {
-	nick := flag.String("nick", "justinfan77777", "")
-	pass := flag.String("pass", "oauth:", "")
+	nick := flag.String("nick", "", "twitch nick")
+	pass := flag.String("pass", "", "twitch oauth")
 	flag.Parse()
 
 	c, err := tmi.NewClient(tmi.Auth(*nick, *pass))
@@ -20,10 +20,6 @@ func main() {
 	}
 
 	c.Command() <- tmi.Join(*nick)
-	c.Command() <- tmi.Join("nymn", "esfandtv", "sodapoppin", "greekgodx", "mizkif",
-		"zoil", "liquidwifi", "vadikus007", "xqcow", "forsen", "dreamhackcs", "nmplol",
-		"gofur", "asmongold", "m0xyy",
-	)
 
 	for ev := range c.Events() {
 		switch ev := ev.(type) {

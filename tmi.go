@@ -179,6 +179,19 @@ type Client struct {
 	commands     chan Command
 }
 
+type Env interface {
+	Command() chan<- Command
+	Events() <-chan Event
+}
+
+type Mux struct {
+	commands chan Command
+	events   chan Event
+}
+
+func (m *Mux) Command() chan<- Command { return m.commands }
+func (m *Mux) Events() <-chan Event    { return m.events }
+
 func NewClient(options ...Option) (*Client, error) {
 	var c Client
 

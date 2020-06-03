@@ -1,4 +1,4 @@
-module tmi
+module github.com/fourst4r/tmi
 
 go 1.13
 
